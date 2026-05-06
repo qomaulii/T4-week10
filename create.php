@@ -1,6 +1,5 @@
 <?php
     require 'config/database.php';
-
     $pesan = "";
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -12,12 +11,10 @@
         $lokasi      = trim($_POST['lokasi'] ?? '');
 
         if (!empty($nama_barang) && !empty($kategori) && !empty($harga)) {
-
             $stmt = $pdo->prepare("
-                INSERT INTO barang (nama_barang, kategori, jumlah, harga, lokasi)
-                VALUES (:nama_barang, :kategori, :jumlah, :harga, :lokasi)
+                insert into barang (nama_barang, kategori, jumlah, harga, lokasi)
+                values (:nama_barang, :kategori, :jumlah, :harga, :lokasi)
             ");
-
             $stmt->execute([
                 ':nama_barang' => $nama_barang,
                 ':kategori'    => $kategori,
@@ -25,12 +22,10 @@
                 ':harga'       => $harga,
                 ':lokasi'      => $lokasi
             ]);
-
             header("Location: index.php?pesan=tambah_sukses");
             exit;
-
         } else {
-            $pesan = "Field wajib harus diisi!";
+            $pesan = "field wajib diisi!";
         }
     }
 ?>
@@ -54,35 +49,28 @@
         <?php endif; ?>
 
         <form method="POST">
-            
             <div class="mb-3">
                 <label>Nama Barang</label>
                 <input type="text" name="nama_barang" class="form-control" required>
             </div>
-
             <div class="mb-3">
                 <label>Kategori</label>
                 <input type="text" name="kategori" class="form-control" required>
             </div>
-
             <div class="mb-3">
                 <label>Jumlah</label>
                 <input type="number" name="jumlah" class="form-control">
             </div>
-
             <div class="mb-3">
                 <label>Harga</label>
                 <input type="number" step="0.01" name="harga" class="form-control" required>
             </div>
-
             <div class="mb-3">
                 <label>Lokasi</label>
                 <input type="text" name="lokasi" class="form-control">
             </div>
-
             <button type="submit" class="btn btn-success">Simpan</button>
             <a href="index.php" class="btn btn-secondary">Kembali</a>
-
         </form>
     </div>
 </body>

@@ -32,7 +32,7 @@
             header("Location: index.php?pesan=edit_sukses");
             exit;
         } else {
-            $pesan = "Semua field wajib diisi!";
+            $pesan = "semua field wajib diisi!";
         }
     }
 ?>
